@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { getCategories } from '../services/categoryService';
 import { createTask } from '../services/taskService';
-import supabase from '../utils/supabaseClient';
+import { supabase }from '../utils/supabaseClient';
 
 export const useCreateTask = () => {
   const [title, setTitle] = useState('');

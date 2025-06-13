@@ -1,4 +1,4 @@
-import supabase from '../utils/supabaseClient';
+import { supabase } from '../utils/supabaseClient';
 import { type Task } from '../models/Task'
 
 export async function getAllTasks() {

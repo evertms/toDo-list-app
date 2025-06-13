@@ -1,6 +1,6 @@
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import supabase from '../utils/supabaseClient';
+import { supabase } from '../utils/supabaseClient';
 
 const PrivateRoute = () => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);

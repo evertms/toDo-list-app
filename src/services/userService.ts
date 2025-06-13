@@ -1,4 +1,4 @@
-import supabase from '../utils/supabaseClient';
+import { supabase } from '../utils/supabaseClient';
 import { type Profile } from '../models/Profile';
 
 export async function updateUserName(newName: string): Promise<{ success: boolean; error?: string }> {

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { getTaskById, updateTask, softDeleteTask } from '../services/taskService';
 import { getCategories } from '../services/categoryService';
-import supabase from '../utils/supabaseClient';
+import { supabase } from '../utils/supabaseClient';
 import type { Task } from '../models/Task';
 import type { Category } from '../models/Category';
 
@@ -84,8 +84,8 @@ export const useEditTask = (taskId: string): UseEditTaskReturn => {
           
           if (taskResult.success && taskResult.data) {
             const taskCategory = taskResult.data.categorias?.nombre;
-            const matchingCategory = categoriesResult.data.find(
-              cat => cat.nombre === taskCategory
+            const matchingCategory = (categoriesResult.data as {id: string, nombre: string}[]).find(
+              (cat) => cat.nombre === taskCategory
             );
             if (matchingCategory) {
               setCategoryId(matchingCategory.id);

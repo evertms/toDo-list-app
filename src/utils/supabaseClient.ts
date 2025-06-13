@@ -1,8 +1,22 @@
 import { createClient } from "@supabase/supabase-js";
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
+const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY;
+class SupabaseSingleton {
+  private static instance: any;
 
-const supabase = createClient(supabaseUrl, supabaseKey);
+  public static getInstance() {
+    if (!SupabaseSingleton.instance) {
+      if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
+        throw new Error('Faltan variables de entorno de Supabase');
+      }
 
-export default supabase;
+      SupabaseSingleton.instance = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    }
+
+    return SupabaseSingleton.instance;
+  }
+}
+
+// Exportamos una sola instancia (usada en toda la app)
+export const supabase = SupabaseSingleton.getInstance();

@@ -1,5 +1,5 @@
 import { useEffect, useState, useCallback } from 'react';
-import supabase from '../utils/supabaseClient';
+import { supabase } from '../utils/supabaseClient';
 import { getCategories } from '../services/categoryService';
 
 export const useCategories = () => {
