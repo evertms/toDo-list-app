@@ -12,7 +12,7 @@
 - **React Hooks**: Para gestión de estado (`useEffect`, `useState`, `useNavigate`, `useAuth`).
 
 ### 2. **Backend y Base de Datos**
-- **Supabase Auth**: Para autenticación de usuarios y gestión de sesión.
+- **Supabase Auth**: Para autenticación de usuarios y gestión de sesión. Para esta primera versión, se desactivó la verificación en dos pasos vía email.
 - **Supabase DB (PostgreSQL)**: Almacena tareas, categorías y perfiles de usuarios.
 - **Row Level Security (RLS)**: Garantiza que cada usuario solo vea sus datos.
 
@@ -221,6 +221,48 @@ src/
 
 ---
 
+## **¿Qué problema resuelve la aplicación?**
+
+La aplicación resuelve el desafío de **gestionar tareas organizadas por categorías**, permitiendo a los usuarios:
+- Registrar y autenticarse para tener acceso personalizado.
+- Crear, listar, editar y eliminar tareas.
+- Organizar las tareas en categorías personalizables.
+- Mantener su información segura y separada de otros usuarios.
+
+Este problema es común en aplicaciones de productividad o gestión diaria, donde se necesita un sistema simple pero eficiente que mantenga el estado y los datos del usuario de forma persistente y segura.
+
+---
+
+### **Solución planteada**
+
+Para resolver este problema, se desarrolló una aplicación web fullstack con las siguientes características:
+
+- **Autenticación basada en Supabase Auth**  
+  Cada usuario inicia sesión o se registra, y solo puede acceder a sus propias tareas y categorías.
+
+- **Conexión centralizada con Supabase usando Singleton**  
+  Se implementó un cliente único (`supabaseClient`) que garantiza una sola instancia de conexión con Supabase. Esto mejora el rendimiento y evita errores por múltiples inicializaciones.
+
+- **Gestión de tareas y categorías con interfaz dinámica**  
+  - Listado de tareas filtradas por categoría.
+  - Formulario para crear nuevas tareas con validación de descripción (máx. 500 caracteres).
+  - Sidebar fijo que muestra perfil, lista de categorías y botón de nueva categoría.
+
+- **Interfaz responsiva inspirada en Microsoft To Do**  
+  - Diseño claro, centrado en usabilidad y navegación intuitiva.
+  - Uso de Tailwind CSS para estilo coherente y moderno.
+
+- **Pruebas unitarias para validar lógica crítica**  
+  Se realizaron pruebas sobre servicios como `authService.ts` y `taskService.ts` para asegurar estabilidad y evitar regresiones.
+
+- **Patrón de diseño: Singleton**  
+  Se utilizó para manejar la conexión con Supabase, garantizando que siempre haya una única instancia activa del cliente.
+
+### **Resultado esperado**
+Una aplicación funcional, segura y escalable, que permite a cada usuario gestionar su vida laboral, personal u otros contextos mediante un sistema sencillo de tareas y categorías, con autenticación real y protección de datos mediante políticas RLS en Supabase.
+
+---
+
 ## **Historias de Usuario Implementadas**
 
 1. **Como usuario, quiero registrarme para empezar a gestionar mis tareas.**
@@ -242,7 +284,7 @@ src/
 | Lección | Descripción |
 |--------|-------------|
 | **TypeScript** | Ayudó a detectar errores de tipado más tempranamente |
-| **Supabase Auth** | Es fácil de integrar y seguro para autenticación, manda correos de verificación y encripta las contraseñas |
+| **Supabase Auth** | Es fácil de integrar y seguro para autenticación, manda correos de verificación y encripta las contraseñas. Aunque en esta primera versión no estoy usando todos los features |
 | **Pruebas unitarias** | Son esenciales para validar lógica e incluso UI y evitar regresiones |
 | **Testing Library** | Facilita la simulación de interacciones y UI |
 | **Row Level Security** | Es clave para mantener datos privados por usuario |
@@ -293,7 +335,7 @@ src/
 - **Manejo de errores más avanzado** (ej: redirección tras 3 intentos fallidos)
 - **Notificaciones** y recordatorios para tareas con fechas próximas
 - **Mejorar UI/UX** con animaciones y modo oscuro
-- **Flujo de registro** con más información del usuario
+- **Flujo de registro** con más información del usuario, para más personalización
 
 ---
 

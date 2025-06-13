@@ -25,7 +25,7 @@ export const useTaskMutations = (setTasks: React.Dispatch<React.SetStateAction<T
   };
 
   const editTask = (id: string) => {
-    navigate(`/task/edit/${id}`);
+    navigate(`/task/${id}`);
   };
 
   const deleteTask = async (id: string) => {

@@ -48,7 +48,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onSuccess }) => {
       }
 
       onSuccess?.();
-      navigate('login');
+      navigate('/dashboard');
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Error desconocido');
     } finally {

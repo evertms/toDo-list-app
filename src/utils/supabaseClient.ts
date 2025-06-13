@@ -18,5 +18,4 @@ class SupabaseSingleton {
   }
 }
 
-// Exportamos una sola instancia (usada en toda la app)
 export const supabase = SupabaseSingleton.getInstance();
