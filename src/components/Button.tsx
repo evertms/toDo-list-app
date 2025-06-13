@@ -2,10 +2,11 @@ import React from 'react';
 
 type ButtonProps = {
   text: string;
-  onClick?: () => void;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  isLoading?: boolean;
 };
 
-const Button: React.FC<ButtonProps> = ({ text, onClick }) => {
+const Button: React.FC<ButtonProps> = ({ text, onClick, isLoading = false }) => {
   const getButtonStyle = () => {
     switch (text) {
       case 'Hecha':
@@ -23,10 +24,11 @@ const Button: React.FC<ButtonProps> = ({ text, onClick }) => {
 
   return (
     <button
-      className={`${getButtonStyle()} ${baseStyle}`}
-      onClick={onClick}
+      className={`${getButtonStyle()} ${baseStyle} ${isLoading ? 'opacity-70 cursor-not-allowed' : ''}`}
+      onClick={isLoading ? undefined : onClick}
+      disabled={isLoading}
     >
-      {text} {}
+      {isLoading ? 'Iniciando...' : text}
     </button>
   );
 };
